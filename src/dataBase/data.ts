@@ -10,7 +10,6 @@ import Revisao from "../entity/Revisao";
 import AgendaViagem from "../entity/AgendaViagem";
 import Abastece from "../entity/Abastecer";
 
-
 dotenv.config();
 
 const connectionFrotas = new DataSource({
@@ -21,9 +20,19 @@ const connectionFrotas = new DataSource({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
   synchronize: false,
+  extra: { decimalNumbers: true },
   logging: false,
   timezone: "Z",
-  entities: [User, Filial, Combustivel, Veiculo, RelVeiUser, Revisao, AgendaViagem, Abastece],
+  entities: [
+    User,
+    Filial,
+    Combustivel,
+    Veiculo,
+    RelVeiUser,
+    Revisao,
+    AgendaViagem,
+    Abastece,
+  ],
   migrations: [],
   subscribers: [],
 });
