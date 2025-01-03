@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { authentication } from "../repositories/UserRepository";
 
-
 const AdminRouter = Router();
 
 AdminRouter.post(

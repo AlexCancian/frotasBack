@@ -28,7 +28,10 @@ class Abastece {
   @Column("decimal", { precision: 10, scale: 2 })
   vlr_abast_nota: number;
 
-  @ManyToOne(() => Veiculo, (veiculosServicos) => veiculosServicos.veiAbastecimento)
+  @ManyToOne(
+    () => Veiculo,
+    (veiculosServicos) => veiculosServicos.veiAbastecimento
+  )
   @JoinColumn({ name: "placa" })
   veiculoId: Veiculo;
 

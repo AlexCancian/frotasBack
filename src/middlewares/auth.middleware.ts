@@ -27,15 +27,17 @@ const adminMiddleware = async (
   next: NextFunction
 ) => {
   try {
-
     const { admin } = res.locals.payload; // Supondo que "admin" esteja no payload
 
     if (!admin) {
-      return res.status(403).json({ message: "Acesso negado: usuário não é admin" });
+      return res
+        .status(403)
+        .json({ message: "Acesso negado: usuário não é admin" });
     }
-  
+
     next();
   } catch (error) {
     res.status(401).json({ message: "Autenticação falhou" });
-  }};
+  }
+};
 export { authenticationMiddleware, adminMiddleware };

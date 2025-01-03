@@ -17,7 +17,8 @@ const getVeiculoRelation = async (): Promise<IVeiculo[]> => {
 };
 
 const getVeiculoRelationById = async (placa: string): Promise<any> => {
-  const veiculos = await veiculo.findOne({where:{placa},
+  const veiculos = await veiculo.findOne({
+    where: { placa },
     relations: ["combustivelId", "filialId"],
   });
   if (!veiculos) {
@@ -127,5 +128,5 @@ export {
   removeVeiculo,
   desativaVeiculo,
   getVeiculoRelation,
-  getVeiculoRelationById
+  getVeiculoRelationById,
 };

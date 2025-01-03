@@ -8,6 +8,7 @@ import relUserVeiRouter from "../controllers/RelUserVeiController";
 import revisaoRouter from "../controllers/RevisaoController";
 import agendaRouter from "../controllers/AgendaController";
 import abasteceRouter from "../controllers/AbasteceController";
+import viagemRouter from "../controllers/ViagemController";
 
 const routers = Router();
 
@@ -20,5 +21,6 @@ routers.use("/relUserVei", relUserVeiRouter);
 routers.use("/revisao", revisaoRouter);
 routers.use("/agenda", agendaRouter);
 routers.use("/abastece", abasteceRouter);
+routers.use("/viagem", viagemRouter);
 
 export default routers;

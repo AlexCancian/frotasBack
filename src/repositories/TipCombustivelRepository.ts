@@ -2,7 +2,6 @@ import connectionFrotas from "../dataBase/data";
 import Combustivel from "../entity/Combustivel";
 import ITipComb from "../interfaces/ITipoCombustivel";
 
-
 const combustivel = connectionFrotas.getRepository(Combustivel);
 
 const getCombustivel = async (): Promise<ITipComb[]> => {
@@ -51,7 +50,10 @@ const updateTipComb = async (id: number, tipCombusAtualizar: ITipComb) => {
       });
       return { status: 202, message: "Tipo Combustivel alterado com sucesso" };
     } else {
-      throw { status: 401, message: "Tipo Combustivel não existe no banco de dados" };
+      throw {
+        status: 401,
+        message: "Tipo Combustivel não existe no banco de dados",
+      };
     }
   } catch (error) {
     throw error;
@@ -79,10 +81,15 @@ const desativaTipCombus = async (id: number, status: boolean) => {
       },
     });
     if (tipCombus) {
-      const desativarTipCombus = await combustivel.update(id, { ativo: status });
+      const desativarTipCombus = await combustivel.update(id, {
+        ativo: status,
+      });
       return "Tipo combustivel atualizado com sucesso";
     } else {
-      throw { status: 401, message: "Tipo combustivel não existe no banco de dados" };
+      throw {
+        status: 401,
+        message: "Tipo combustivel não existe no banco de dados",
+      };
     }
   } catch (error) {
     throw error;
@@ -90,10 +97,10 @@ const desativaTipCombus = async (id: number, status: boolean) => {
 };
 
 export {
-getCombustivel,
-getCombustivelById,
-postCombustivel,
-updateTipComb,
-desativaTipCombus,
-removeTipCombus
+  getCombustivel,
+  getCombustivelById,
+  postCombustivel,
+  updateTipComb,
+  desativaTipCombus,
+  removeTipCombus,
 };
