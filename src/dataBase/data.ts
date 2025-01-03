@@ -21,6 +21,7 @@ const connectionFrotas = new DataSource({
   database: process.env.DB_DATABASE,
   synchronize: false,
   logging: false,
+  timezone: "Z",
   entities: [User, Filial, Combustivel, Veiculo, RelVeiUser, Revisao, AgendaViagem],
   migrations: [],
   subscribers: [],
