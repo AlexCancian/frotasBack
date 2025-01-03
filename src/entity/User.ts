@@ -9,7 +9,7 @@ import {
 import bcrypt from "bcrypt";
 import AgendaViagem from "./AgendaViagem";
 import RelVeiUser from "./RelaVeiUser";
-// import Abastece from "./Abastecer";
+import Abastece from "./Abastecer";
 
 @Entity("usuario")
 class User {
@@ -48,8 +48,8 @@ class User {
   @OneToMany(() => AgendaViagem, (viagem) => viagem.usuarioId)
   usuariosAgendaViagem: AgendaViagem[];
 
-  // @OneToMany(() => Abastece, (abastecer) => abastecer.usuarioId)
-  // userAbastecimento: Abastece[];
+  @OneToMany(() => Abastece, (abastecer) => abastecer.usuarioId)
+  userAbastecimento: Abastece[];
 }
 
 export default User;
