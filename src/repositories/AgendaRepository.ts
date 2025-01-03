@@ -54,7 +54,7 @@ const postAgenda = async (novaAgenda: IAgenda): Promise<any> => {
       message: "O intervalo de tempo se sobrepõe a uma programação existente.",
     };
   }
-
+  console.log(generateDateTimeISO())
   const newAgenda = await agenda.create({
     data_agendamento: generateDateTimeISO(),
     data_ini_agenda: novaAgenda.data_ini_agenda,
