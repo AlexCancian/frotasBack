@@ -1,6 +1,14 @@
 import { NextFunction, Request, Response, Router } from "express";
-import { desativaVeiculo, getVeiculo, getVeiculoById, getVeiculoRelation, getVeiculoRelationById, postVeiculo, removeVeiculo, updateVeiculo } from "../repositories/veiculo";
-
+import {
+  desativaVeiculo,
+  getVeiculo,
+  getVeiculoById,
+  getVeiculoRelation,
+  getVeiculoRelationById,
+  postVeiculo,
+  removeVeiculo,
+  updateVeiculo,
+} from "../repositories/VeiculoRepository";
 
 const veiculoRouter = Router();
 
@@ -11,7 +19,7 @@ veiculoRouter.get(
       const veiculos = await getVeiculo();
       return res.status(200).json(veiculos);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       next(error);
     }
   }
@@ -24,20 +32,17 @@ veiculoRouter.get(
       const veiculos = await getVeiculoRelation();
       return res.status(200).json(veiculos);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       next(error);
     }
   }
 );
 
-veiculoRouter.get(
-  "/:id",
-  async (req: Request, res: Response): Promise<any> => {
-    const { id } = req.params;
-    const veiculo = await getVeiculoById(id);
-    return res.status(200).json(veiculo);
-  }
-);
+veiculoRouter.get("/:id", async (req: Request, res: Response): Promise<any> => {
+  const { id } = req.params;
+  const veiculo = await getVeiculoById(id);
+  return res.status(200).json(veiculo);
+});
 
 veiculoRouter.get(
   "/relation/:id",

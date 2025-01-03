@@ -1,5 +1,13 @@
 import { NextFunction, Request, Response, Router } from "express";
-import { getRelUserVei, getRelUserVeiById, getRelUserVeiRelation, getRelUserVeiRelationById, postRelUserVei, removeRelUserVei, updateRelUserVei } from "../repositories/RelUserVeiculo";
+import {
+  getRelUserVei,
+  getRelUserVeiById,
+  getRelUserVeiRelation,
+  getRelUserVeiRelationById,
+  postRelUserVei,
+  removeRelUserVei,
+  updateRelUserVei,
+} from "../repositories/RelUserVeiculoRepository";
 
 const relUserVeiRouter = Router();
 
@@ -10,7 +18,7 @@ relUserVeiRouter.get(
       const relaciomentos = await getRelUserVei();
       return res.status(200).json(relaciomentos);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       next(error);
     }
   }
@@ -23,7 +31,7 @@ relUserVeiRouter.get(
       const relaciomentos = await getRelUserVeiRelation();
       return res.status(200).json(relaciomentos);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       next(error);
     }
   }
@@ -51,7 +59,7 @@ relUserVeiRouter.post(
   "/",
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
-      console.log(req.body)
+      console.log(req.body);
       // const { error } = await empresaschema.validate(req.body, {
       //   abortEarly: false,
       // });

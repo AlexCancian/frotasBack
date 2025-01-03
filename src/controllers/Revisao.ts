@@ -1,6 +1,12 @@
 import { NextFunction, Request, Response, Router } from "express";
-import { getRevisao, getRevisaoById, getRevisaoRelation, postRevisao, removeRevisao, updateRevisao } from "../repositories/Revisao";
-
+import {
+  getRevisao,
+  getRevisaoById,
+  getRevisaoRelation,
+  postRevisao,
+  removeRevisao,
+  updateRevisao,
+} from "../repositories/RevisaoRepository";
 
 const revisaoRouter = Router();
 
@@ -28,14 +34,11 @@ revisaoRouter.get(
   }
 );
 
-revisaoRouter.get(
-  "/:id",
-  async (req: Request, res: Response): Promise<any> => {
-    const { id } = req.params;
-    const revisao = await getRevisaoById(Number(id));
-    return res.status(200).json(revisao);
-  }
-);
+revisaoRouter.get("/:id", async (req: Request, res: Response): Promise<any> => {
+  const { id } = req.params;
+  const revisao = await getRevisaoById(Number(id));
+  return res.status(200).json(revisao);
+});
 
 revisaoRouter.post(
   "/",
