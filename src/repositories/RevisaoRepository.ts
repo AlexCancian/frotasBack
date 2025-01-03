@@ -97,5 +97,5 @@ export {
   getRevisaoById,
   postRevisao,
   updateRevisao,
-  removeRevisao
+  removeRevisao,
 };

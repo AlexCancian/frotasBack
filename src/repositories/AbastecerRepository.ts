@@ -26,7 +26,7 @@ const postAbastece = async (novoAbastecimento: IAbastecer): Promise<any> => {
   const exist = await abastece
     .createQueryBuilder("abs")
     .where("abs.placa = :placa", { placa: veiculoId })
-    .andWhere("abs.km > :km", { km })
+    .andWhere("abs.km >= :km", { km })
     .getOne();
   if (exist !== null) {
     return {

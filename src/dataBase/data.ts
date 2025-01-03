@@ -9,6 +9,7 @@ import RelVeiUser from "../entity/RelaVeiUser";
 import Revisao from "../entity/Revisao";
 import AgendaViagem from "../entity/AgendaViagem";
 import Abastece from "../entity/Abastecer";
+import Viagem from "../entity/Viagem";
 
 dotenv.config();
 
@@ -32,6 +33,7 @@ const connectionFrotas = new DataSource({
     Revisao,
     AgendaViagem,
     Abastece,
+    Viagem,
   ],
   migrations: [],
   subscribers: [],

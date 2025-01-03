@@ -8,7 +8,7 @@ import {
 } from "typeorm";
 import Veiculo from "./Veiculo";
 import User from "./User";
-//import Viagem from "./Viagem";
+import Viagem from "./Viagem";
 
 @Entity("agenda")
 class AgendaViagem {
@@ -38,8 +38,8 @@ class AgendaViagem {
   @JoinColumn({ name: "id_usuario" })
   usuarioId: User;
 
-//   @OneToMany(() => Viagem, (viagem) => viagem.agendaId)
-//   agendaViagem: Viagem[];
+  @OneToMany(() => Viagem, (viagem) => viagem.agendaId)
+  agendaViagem: Viagem[];
 }
 
 export default AgendaViagem;

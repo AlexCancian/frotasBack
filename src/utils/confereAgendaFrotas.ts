@@ -1,6 +1,6 @@
-import { Repository } from 'typeorm';
-import { parseISO, isBefore, isAfter } from 'date-fns';
-import AgendaViagem from '../entity/AgendaViagem';
+import { Repository } from "typeorm";
+import { parseISO, isBefore, isAfter } from "date-fns";
+import AgendaViagem from "../entity/AgendaViagem";
 
 async function isOverlappingAgendaFrotas(
   agenda: Repository<AgendaViagem>,
@@ -9,9 +9,8 @@ async function isOverlappingAgendaFrotas(
   placa: string,
   idAgenda?: number
 ): Promise<boolean> {
-
   const agendas = await agenda.find({
-    where: { veiculoId:{ placa }},
+    where: { veiculoId: { placa } },
     relations: ["veiculoId"],
   });
 
@@ -26,8 +25,8 @@ async function isOverlappingAgendaFrotas(
 
     // Verifica se há sobreposição de horários
     if (
-      (isBefore(novaDataIniAgenda, existingEnd) && 
-       isAfter(novaDataFinalAgenda, existingStart))
+      isBefore(novaDataIniAgenda, existingEnd) &&
+      isAfter(novaDataFinalAgenda, existingStart)
     ) {
       return true;
     }
