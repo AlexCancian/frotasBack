@@ -101,21 +101,18 @@ const updateAgenda = async (id: number, agendaAtualizar: IAgenda) => {
   }
 };
 
-// const removerAgenda = async (idAgenda: number): Promise<any> => {
-//   try {
-//     const agendas = await agenda.findOneBy({ idAgenda });
-//     if (!agendas) {
-//       return { status: 404, message: "id não existe" };
-//     }
-//     if(agendas.aceiteAgenda === true){
-//       return {status: 403, message: "Agenda ja foi aceita pela empresa"}
-//     }
-//     await agenda.delete(idAgenda);
-//     return { status: 200, message: "Agenda removida com sucesso" };
-//   } catch (error) {
-//     throw error;
-//   }
-// };
+const removerAgenda = async (id_agenda: number): Promise<any> => {
+  try {
+    const agendas = await agenda.findOneBy({ id_agenda });
+    if (!agendas) {
+      return { status: 404, message: "id não existe" };
+    }
+    await agenda.delete(id_agenda);
+    return { status: 200, message: "Agenda removida com sucesso" };
+  } catch (error) {
+    throw error;
+  }
+};
 
 export {
   getAgenda,
@@ -123,5 +120,6 @@ export {
   getAgendaRelationUser,
   getAgendaById,
   postAgenda,
-  updateAgenda
+  updateAgenda,
+  removerAgenda
 };

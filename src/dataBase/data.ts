@@ -8,6 +8,7 @@ import Veiculo from "../entity/Veiculo";
 import RelVeiUser from "../entity/RelaVeiUser";
 import Revisao from "../entity/Revisao";
 import AgendaViagem from "../entity/AgendaViagem";
+import Abastece from "../entity/Abastecer";
 
 
 dotenv.config();
@@ -22,7 +23,7 @@ const connectionFrotas = new DataSource({
   synchronize: false,
   logging: false,
   timezone: "Z",
-  entities: [User, Filial, Combustivel, Veiculo, RelVeiUser, Revisao, AgendaViagem],
+  entities: [User, Filial, Combustivel, Veiculo, RelVeiUser, Revisao, AgendaViagem, Abastece],
   migrations: [],
   subscribers: [],
 });

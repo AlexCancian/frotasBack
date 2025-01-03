@@ -11,7 +11,7 @@ import Combustivel from "./Combustivel";
 import RelVeiUser from "./RelaVeiUser";
 import Revisao from "./Revisao";
 import AgendaViagem from "./AgendaViagem";
-// import Abastece from "./Abastecer";
+import Abastece from "./Abastecer";
 
 @Entity("veiculo")
 class Veiculo {
@@ -53,8 +53,8 @@ class Veiculo {
   @OneToMany(() => AgendaViagem, (viagem) => viagem.veiculoId)
   veiculosAgendaViagem: AgendaViagem[];
 
-//   @OneToMany(() => Abastece, (abastecer) => abastecer.veiculoId)
-//   veiAbastecimento: Abastece[];
+  @OneToMany(() => Abastece, (abastecer) => abastecer.veiculoId)
+  veiAbastecimento: Abastece[];
 }
 
 export default Veiculo;
