@@ -6,7 +6,7 @@ import {
   postCombustivel,
   removeTipCombus,
   updateTipComb,
-} from "../repositories/TipCombustivel";
+} from "../repositories/TipCombustivelRepository";
 
 const combustivelRouter = Router();
 
