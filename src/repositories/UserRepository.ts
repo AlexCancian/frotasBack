@@ -85,7 +85,7 @@ const authentication = async ({ numero_user_ERP, senha }: IAuthParametros) => {
         id,
         admin,
       });
-      return { token };
+      return { token, id };
     } else {
       throw { status: 401, message: "Usuario não cadastrado" };
     }
