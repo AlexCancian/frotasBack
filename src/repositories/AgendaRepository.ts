@@ -5,7 +5,9 @@ import IAgenda from "../interfaces/IAgenda";
 import isOverlappingAgendaFrotas from "../utils/confereAgendaFrotas";
 import generateDateTimeISO from "../utils/gerarHoraAtual";
 
-const minimumDate = new Date();
+const today = new Date();
+const minimumDate = new Date(today);
+minimumDate.setDate(today.getDate() - 1);
 
 const agenda = connectionFrotas.getRepository(AgendaViagem);
 
