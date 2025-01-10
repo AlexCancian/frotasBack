@@ -1,8 +1,11 @@
+import { MoreThanOrEqual } from "typeorm";
 import connectionFrotas from "../dataBase/data";
 import AgendaViagem from "../entity/AgendaViagem";
 import IAgenda from "../interfaces/IAgenda";
 import isOverlappingAgendaFrotas from "../utils/confereAgendaFrotas";
 import generateDateTimeISO from "../utils/gerarHoraAtual";
+
+const minimumDate = new Date();
 
 const agenda = connectionFrotas.getRepository(AgendaViagem);
 
@@ -12,15 +15,17 @@ const getAgenda = async (): Promise<IAgenda[]> => {
 };
 
 const getAgendaRelationUser = async (id: number): Promise<any> => {
+  console.log(minimumDate)
   const data = await agenda.find({
     where: {
       usuarioId: {
-        id_usuario: id,
+        id_usuario: id, 
       },
+      data_ini_agenda: MoreThanOrEqual(minimumDate),
     },
     relations: { veiculoId: true },
     order: {
-      data_ini_agenda: {},
+      data_ini_agenda: 'ASC',
     },
   });
   return data;
