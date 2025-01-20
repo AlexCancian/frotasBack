@@ -9,20 +9,14 @@ const getViagem = async (): Promise<IViagem[]> => {
   return data;
 };
 
-// const getViagemRelationUser = async (id: number): Promise<any> => {
-//   const data = await viagem.find({
-//     where: {
-//       usuarioId: {
-//         id_usuario: id,
-//       },
-//     },
-//     relations: { veiculoId: true },
-//     order: {
-//       data_ini_agenda: {},
-//     },
-//   });
-//   return data;
-// };
+const getViagemRelationUser = async (id: number): Promise<any> => {
+  const viagens = await viagem.find({
+    where: { agendaId: { usuarioId: { id_usuario: id } } },
+    relations: ["agendaId", "agendaId.veiculoId", "agendaId.usuarioId"],
+  });
+
+  return viagens;
+};
 
 const getViagemRelation = async (): Promise<IViagem[]> => {
   const data = await viagem.find({ relations: ["agendaId"] });
@@ -92,4 +86,5 @@ export {
   postViagem,
   updateViagem,
   removerViagem,
+  getViagemRelationUser,
 };
