@@ -22,19 +22,6 @@ const getAbasteceById = async (id_abastecimento: number): Promise<any> => {
 };
 
 const postAbastece = async (novoAbastecimento: IAbastecer): Promise<any> => {
-  const { veiculoId, km } = novoAbastecimento;
-  const exist = await abastece
-    .createQueryBuilder("abs")
-    .where("abs.placa = :placa", { placa: veiculoId })
-    .andWhere("abs.km >= :km", { km })
-    .getOne();
-  if (exist !== null) {
-    return {
-      status: 409,
-      message: `${novoAbastecimento.veiculoId} já tem abastecimento com km maior que ${novoAbastecimento.km}`,
-    };
-  }
-
   const newAbastecimento = await abastece.create({
     km: novoAbastecimento.km,
     data_hr_abas: novoAbastecimento.data_hr_abas,
