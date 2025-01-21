@@ -25,19 +25,6 @@ const getRevisaoById = async (id_revisao: number): Promise<any> => {
 };
 
 const postRevisao = async (novaRevisao: IRevisao): Promise<any> => {
-  const { km_atual, veiculoId } = novaRevisao;
-  const exist = await revisao
-    .createQueryBuilder("rev")
-    .where("rev.placa = :placa", { placa: veiculoId })
-    .andWhere("rev.km_atual > :km_atual", { km_atual })
-    .getOne();
-  if (exist !== null) {
-    return {
-      status: 409,
-      message: `${novaRevisao.veiculoId} já tem revisões com km maior que ${km_atual}`,
-    };
-  }
-
   const newRevisao = await revisao.create({
     nome: novaRevisao.nome,
     tipo_rev: novaRevisao.tipo_rev,
