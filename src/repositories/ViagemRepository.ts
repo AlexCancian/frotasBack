@@ -41,7 +41,7 @@ const postViagem = async (novaViagem: IViagem): Promise<any> => {
     lavagem: novaViagem.lavagem,
     observacao_final: novaViagem.observacao_final,
     agendaId: novaViagem.agendaId,
-    nome_veiculo: novaViagem.veiculo_nome,
+    nome_veiculo: novaViagem.nome_veiculo,
     placa: novaViagem.placa,
     id_usuario: novaViagem.id_usuario,
   });
@@ -61,7 +61,7 @@ const updateViagem = async (id: number, viagemAtualizar: IViagem) => {
       lavagem: viagemAtualizar.lavagem,
       observacao_final: viagemAtualizar.observacao_final,
       agendaId: viagemAtualizar.agendaId,
-      nome_veiculo: viagemAtualizar.veiculo_nome,
+      nome_veiculo: viagemAtualizar.nome_veiculo,
       placa: viagemAtualizar.placa,
       id_usuario: viagemAtualizar.id_usuario,
     });
