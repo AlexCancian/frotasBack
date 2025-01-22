@@ -36,6 +36,15 @@ class Viagem {
   @Column("varchar", { length: 500 })
   observacao_final: string;
 
+  @Column("varchar", { length: 120 })
+  veiculo_nome: string;
+
+  @Column("char", { length: 7 })
+  placa: string;
+
+  @Column("int")
+  id_usuario: number;
+
   @ManyToOne(() => AgendaViagem, (agenda) => agenda.agendaViagem)
   @JoinColumn({ name: "id_agenda" })
   agendaId: AgendaViagem;

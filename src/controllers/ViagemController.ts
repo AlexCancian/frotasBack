@@ -3,7 +3,7 @@ import {
   getViagem,
   getViagemById,
   getViagemRelation,
-  getViagemRelationUser,
+  getViagemUserId,
   postViagem,
   removerViagem,
   updateViagem,
@@ -40,7 +40,7 @@ viagemRouter.get(
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const id = Number(req.query.usuarioId);
-      const relation = await getViagemRelationUser(id);
+      const relation = await getViagemUserId(id);
       return res.status(200).json(relation);
     } catch (error) {
       next(error);

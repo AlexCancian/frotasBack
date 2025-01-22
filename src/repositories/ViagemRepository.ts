@@ -9,10 +9,9 @@ const getViagem = async (): Promise<IViagem[]> => {
   return data;
 };
 
-const getViagemRelationUser = async (id: number): Promise<any> => {
+const getViagemUserId = async (id: number): Promise<any> => {
   const viagens = await viagem.find({
-    where: { agendaId: { usuarioId: { id_usuario: id } } },
-    relations: ["agendaId", "agendaId.veiculoId", "agendaId.usuarioId"],
+    where: { id_usuario: id },
   });
 
   return viagens;
@@ -42,6 +41,9 @@ const postViagem = async (novaViagem: IViagem): Promise<any> => {
     lavagem: novaViagem.lavagem,
     observacao_final: novaViagem.observacao_final,
     agendaId: novaViagem.agendaId,
+    veiculo_nome: novaViagem.veiculo_nome,
+    placa: novaViagem.placa,
+    id_usuario: novaViagem.id_usuario,
   });
   await viagem.save(newViagem);
   return newViagem;
@@ -59,6 +61,9 @@ const updateViagem = async (id: number, viagemAtualizar: IViagem) => {
       lavagem: viagemAtualizar.lavagem,
       observacao_final: viagemAtualizar.observacao_final,
       agendaId: viagemAtualizar.agendaId,
+      veiculo_nome: viagemAtualizar.veiculo_nome,
+      placa: viagemAtualizar.placa,
+      id_usuario: viagemAtualizar.id_usuario,
     });
     return { status: 202, message: "Viagem alterada com sucesso" };
   } catch (error) {
@@ -86,5 +91,5 @@ export {
   postViagem,
   updateViagem,
   removerViagem,
-  getViagemRelationUser,
+  getViagemUserId,
 };

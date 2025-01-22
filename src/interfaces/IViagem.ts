@@ -10,5 +10,8 @@ interface IViagem {
   lavagem: boolean;
   observacao_final: string;
   agendaId: AgendaViagem;
+  veiculo_nome: string;
+  placa: string;
+  id_usuario: number;
 }
 export default IViagem;
