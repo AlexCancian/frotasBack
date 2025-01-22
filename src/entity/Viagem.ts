@@ -37,7 +37,7 @@ class Viagem {
   observacao_final: string;
 
   @Column("varchar", { length: 120 })
-  veiculo_nome: string;
+  nome_veiculo: string;
 
   @Column("char", { length: 7 })
   placa: string;
