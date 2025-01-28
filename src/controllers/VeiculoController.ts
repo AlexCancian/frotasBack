@@ -9,11 +9,13 @@ import {
   removeVeiculo,
   updateVeiculo,
 } from "../repositories/VeiculoRepository";
+import { authenticationMiddleware } from "../middlewares/auth.middleware";
 
 const veiculoRouter = Router();
 
 veiculoRouter.get(
   "/",
+  authenticationMiddleware,
   async (_req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const veiculos = await getVeiculo();
@@ -27,6 +29,7 @@ veiculoRouter.get(
 
 veiculoRouter.get(
   "/relation/",
+  authenticationMiddleware,
   async (_req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const veiculos = await getVeiculoRelation();
@@ -38,14 +41,19 @@ veiculoRouter.get(
   }
 );
 
-veiculoRouter.get("/:id", async (req: Request, res: Response): Promise<any> => {
-  const { id } = req.params;
-  const veiculo = await getVeiculoById(id);
-  return res.status(200).json(veiculo);
-});
+veiculoRouter.get(
+  "/:id",
+  authenticationMiddleware,
+  async (req: Request, res: Response): Promise<any> => {
+    const { id } = req.params;
+    const veiculo = await getVeiculoById(id);
+    return res.status(200).json(veiculo);
+  }
+);
 
 veiculoRouter.get(
   "/relation/:id",
+  authenticationMiddleware,
   async (req: Request, res: Response): Promise<any> => {
     const { id } = req.params;
     const veiculo = await getVeiculoRelationById(id);
@@ -55,6 +63,7 @@ veiculoRouter.get(
 
 veiculoRouter.post(
   "/",
+  authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       // const { error } = await empresaschema.validate(req.body, {
@@ -73,6 +82,7 @@ veiculoRouter.post(
 
 veiculoRouter.put(
   "/:id",
+  authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       // const { error } = await Refschema.validate(req.body, {
@@ -92,6 +102,7 @@ veiculoRouter.put(
 
 veiculoRouter.delete(
   "/:id",
+  authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const { id } = req.params;
@@ -105,6 +116,7 @@ veiculoRouter.delete(
 
 veiculoRouter.patch(
   "/veiculoStatus/:id",
+  authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const { id } = req.params;

@@ -9,11 +9,12 @@ import {
   updateUser,
 } from "../repositories/UserRepository";
 import bcrypt from "bcrypt";
+import { authenticationMiddleware } from "../middlewares/auth.middleware";
 
 const userRouter = Router();
 
 userRouter.get(
-  "/",
+  "/", authenticationMiddleware,
   async (_req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const usuarios = await getUsuarios();
@@ -25,7 +26,7 @@ userRouter.get(
 );
 
 userRouter.get(
-  "/:id",
+  "/:id", authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     const { id } = req.params;
     const usuario = await getUsuarioById(Number(id));
@@ -34,7 +35,7 @@ userRouter.get(
 );
 
 userRouter.post(
-  "/",
+  "/", authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       // const { error } = await empresaschema.validate(req.body, {
@@ -52,7 +53,7 @@ userRouter.post(
 );
 
 userRouter.put(
-  "/atuaUser/:id",
+  "/atuaUser/:id", authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       // const { error } = await Refschema.validate(req.body, {
@@ -71,7 +72,7 @@ userRouter.put(
 );
 
 userRouter.put(
-  "/atuaSenha/:id",
+  "/atuaSenha/:id", authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       // const { error } = await userSenha.validate(req.body, {
@@ -95,7 +96,7 @@ userRouter.put(
 );
 
 userRouter.patch(
-  "/statusAdmin/:id",
+  "/statusAdmin/:id", authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       // const { error } = await userPatchAdmin.validate(req.body, {
@@ -116,7 +117,7 @@ userRouter.patch(
 );
 
 userRouter.patch(
-  "/userStatus/:id",
+  "/userStatus/:id", authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const { id } = req.params;

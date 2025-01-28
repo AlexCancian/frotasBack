@@ -8,11 +8,13 @@ import {
   removerAgenda,
   updateAgenda,
 } from "../repositories/AgendaRepository";
+import { authenticationMiddleware } from "../middlewares/auth.middleware";
 
 const agendaRouter = Router();
 
 agendaRouter.get(
   "/",
+  authenticationMiddleware,
   async (_req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const agendas = await getAgenda();
@@ -25,6 +27,7 @@ agendaRouter.get(
 
 agendaRouter.get(
   "/relation",
+  authenticationMiddleware,
   async (_req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const agendas = await getAgendaRelation();
@@ -37,6 +40,7 @@ agendaRouter.get(
 
 agendaRouter.get(
   "/relationUser",
+  authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const id = Number(req.query.usuarioId);
@@ -48,14 +52,19 @@ agendaRouter.get(
   }
 );
 
-agendaRouter.get("/:id", async (req: Request, res: Response): Promise<any> => {
-  const { id } = req.params;
-  const agenda = await getAgendaById(Number(id));
-  return res.status(200).json(agenda);
-});
+agendaRouter.get(
+  "/:id",
+  authenticationMiddleware,
+  async (req: Request, res: Response): Promise<any> => {
+    const { id } = req.params;
+    const agenda = await getAgendaById(Number(id));
+    return res.status(200).json(agenda);
+  }
+);
 
 agendaRouter.post(
   "/",
+  authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       // const { error } = await empresaschema.validate(req.body, {
@@ -74,6 +83,7 @@ agendaRouter.post(
 
 agendaRouter.put(
   "/atuaAgenda/:id",
+  authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       // const { error } = await Refschema.validate(req.body, {
@@ -93,6 +103,7 @@ agendaRouter.put(
 
 agendaRouter.delete(
   "/:id",
+  authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const { id } = req.params;

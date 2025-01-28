@@ -7,11 +7,12 @@ import {
   removeFilial,
   updateFilial,
 } from "../repositories/FilialRepository";
+import { authenticationMiddleware } from "../middlewares/auth.middleware";
 
 const filialRouter = Router();
 
 filialRouter.get(
-  "/",
+  "/", authenticationMiddleware,
   async (_req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const filiais = await getFilial();
@@ -22,14 +23,14 @@ filialRouter.get(
   }
 );
 
-filialRouter.get("/:id", async (req: Request, res: Response): Promise<any> => {
+filialRouter.get("/:id", authenticationMiddleware, async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
   const filial = await getFilialById(Number(id));
   return res.status(200).json(filial);
 });
 
 filialRouter.post(
-  "/",
+  "/", authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       // const { error } = await empresaschema.validate(req.body, {
@@ -47,7 +48,7 @@ filialRouter.post(
 );
 
 filialRouter.put(
-  "/atuaFilial/:id",
+  "/atuaFilial/:id", authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       // const { error } = await Refschema.validate(req.body, {
@@ -66,7 +67,7 @@ filialRouter.put(
 );
 
 filialRouter.delete(
-  "/:id",
+  "/:id", authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const { id } = req.params;
@@ -79,7 +80,7 @@ filialRouter.delete(
 );
 
 filialRouter.patch(
-  "/filialStatus/:id",
+  "/filialStatus/:id", authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const { id } = req.params;

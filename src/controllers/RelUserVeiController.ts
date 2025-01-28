@@ -8,11 +8,12 @@ import {
   removeRelUserVei,
   updateRelUserVei,
 } from "../repositories/RelUserVeiculoRepository";
+import { authenticationMiddleware } from "../middlewares/auth.middleware";
 
 const relUserVeiRouter = Router();
 
 relUserVeiRouter.get(
-  "/",
+  "/", authenticationMiddleware,
   async (_req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const relaciomentos = await getRelUserVei();
@@ -25,7 +26,7 @@ relUserVeiRouter.get(
 );
 
 relUserVeiRouter.get(
-  "/relation/",
+  "/relation/", authenticationMiddleware,
   async (_req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const relaciomentos = await getRelUserVeiRelation();
@@ -38,7 +39,7 @@ relUserVeiRouter.get(
 );
 
 relUserVeiRouter.get(
-  "/:id",
+  "/:id", authenticationMiddleware,
   async (req: Request, res: Response): Promise<any> => {
     const { id } = req.params;
     const relacionamento = await getRelUserVeiById(Number(id));
@@ -47,7 +48,7 @@ relUserVeiRouter.get(
 );
 
 relUserVeiRouter.get(
-  "/relation/:id",
+  "/relation/:id", authenticationMiddleware,
   async (req: Request, res: Response): Promise<any> => {
     const { id } = req.params;
     const relacionamento = await getRelUserVeiRelationById(Number(id));
@@ -56,7 +57,7 @@ relUserVeiRouter.get(
 );
 
 relUserVeiRouter.post(
-  "/",
+  "/", authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       console.log(req.body);
@@ -75,7 +76,7 @@ relUserVeiRouter.post(
 );
 
 relUserVeiRouter.put(
-  "/:id",
+  "/:id", authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       // const { error } = await Refschema.validate(req.body, {
@@ -94,7 +95,7 @@ relUserVeiRouter.put(
 );
 
 relUserVeiRouter.delete(
-  "/:id",
+  "/:id", authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const { id } = req.params;

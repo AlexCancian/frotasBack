@@ -7,11 +7,13 @@ import {
   removeRevisao,
   updateRevisao,
 } from "../repositories/RevisaoRepository";
+import { authenticationMiddleware } from "../middlewares/auth.middleware";
 
 const revisaoRouter = Router();
 
 revisaoRouter.get(
   "/",
+  authenticationMiddleware,
   async (_req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const revisoes = await getRevisao();
@@ -24,6 +26,7 @@ revisaoRouter.get(
 
 revisaoRouter.get(
   "/relation/",
+  authenticationMiddleware,
   async (_req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const revisoes = await getRevisaoRelation();
@@ -34,14 +37,19 @@ revisaoRouter.get(
   }
 );
 
-revisaoRouter.get("/:id", async (req: Request, res: Response): Promise<any> => {
-  const { id } = req.params;
-  const revisao = await getRevisaoById(Number(id));
-  return res.status(200).json(revisao);
-});
+revisaoRouter.get(
+  "/:id",
+  authenticationMiddleware,
+  async (req: Request, res: Response): Promise<any> => {
+    const { id } = req.params;
+    const revisao = await getRevisaoById(Number(id));
+    return res.status(200).json(revisao);
+  }
+);
 
 revisaoRouter.post(
   "/",
+  authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       // const { error } = await empresaschema.validate(req.body, {
@@ -60,6 +68,7 @@ revisaoRouter.post(
 
 revisaoRouter.put(
   "/:id",
+  authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       // const { error } = await Refschema.validate(req.body, {
@@ -79,6 +88,7 @@ revisaoRouter.put(
 
 revisaoRouter.delete(
   "/:id",
+  authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const { id } = req.params;
