@@ -7,11 +7,13 @@ import {
   removeTipCombus,
   updateTipComb,
 } from "../repositories/TipCombustivelRepository";
+import { authenticationMiddleware } from "../middlewares/auth.middleware";
 
 const combustivelRouter = Router();
 
 combustivelRouter.get(
   "/",
+  authenticationMiddleware,
   async (_req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const tipCombus = await getCombustivel();
@@ -24,6 +26,7 @@ combustivelRouter.get(
 
 combustivelRouter.get(
   "/:id",
+  authenticationMiddleware,
   async (req: Request, res: Response): Promise<any> => {
     const { id } = req.params;
     const tipCombus = await getCombustivelById(Number(id));
@@ -33,6 +36,7 @@ combustivelRouter.get(
 
 combustivelRouter.post(
   "/",
+  authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       // const { error } = await empresaschema.validate(req.body, {
@@ -51,6 +55,7 @@ combustivelRouter.post(
 
 combustivelRouter.put(
   "/atuaTipCombus/:id",
+  authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       // const { error } = await Refschema.validate(req.body, {
@@ -70,6 +75,7 @@ combustivelRouter.put(
 
 combustivelRouter.delete(
   "/:id",
+  authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const { id } = req.params;
@@ -83,6 +89,7 @@ combustivelRouter.delete(
 
 combustivelRouter.patch(
   "/tipCombusStatus/:id",
+  authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const { id } = req.params;

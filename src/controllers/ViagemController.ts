@@ -8,11 +8,13 @@ import {
   removerViagem,
   updateViagem,
 } from "../repositories/ViagemRepository";
+import { authenticationMiddleware } from "../middlewares/auth.middleware";
 
 const viagemRouter = Router();
 
 viagemRouter.get(
   "/",
+  authenticationMiddleware,
   async (_req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const viagens = await getViagem();
@@ -25,6 +27,7 @@ viagemRouter.get(
 
 viagemRouter.get(
   "/relation",
+  authenticationMiddleware,
   async (_req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const viagens = await getViagemRelation();
@@ -37,6 +40,7 @@ viagemRouter.get(
 
 viagemRouter.get(
   "/relationUser",
+  authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const id = Number(req.query.usuarioId);
@@ -48,14 +52,19 @@ viagemRouter.get(
   }
 );
 
-viagemRouter.get("/:id", async (req: Request, res: Response): Promise<any> => {
-  const { id } = req.params;
-  const viagemById = await getViagemById(Number(id));
-  return res.status(200).json(viagemById);
-});
+viagemRouter.get(
+  "/:id",
+  authenticationMiddleware,
+  async (req: Request, res: Response): Promise<any> => {
+    const { id } = req.params;
+    const viagemById = await getViagemById(Number(id));
+    return res.status(200).json(viagemById);
+  }
+);
 
 viagemRouter.post(
   "/",
+  authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       // const { error } = await empresaschema.validate(req.body, {
@@ -74,6 +83,7 @@ viagemRouter.post(
 
 viagemRouter.put(
   "/:id",
+  authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       // const { error } = await Refschema.validate(req.body, {
@@ -93,6 +103,7 @@ viagemRouter.put(
 
 viagemRouter.delete(
   "/:id",
+  authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const { id } = req.params;
