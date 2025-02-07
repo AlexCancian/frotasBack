@@ -8,8 +8,18 @@ const getAbastece = async (): Promise<IAbastecer[]> => {
   const data = await abastece.find();
   return data;
 };
-const getAbasteceRelation = async (): Promise<IAbastecer[]> => {
-  const data = await abastece.find({ relations: ["veiculoId", "usuarioId"] });
+const getAbasteceRelation = async (
+  usuarioId?: number
+): Promise<IAbastecer[]> => {
+  const whereCondition = usuarioId
+    ? { usuarioId: { id_usuario: usuarioId } }
+    : {};
+
+  const data = await abastece.find({
+    relations: ["veiculoId", "usuarioId"],
+    where: whereCondition,
+  });
+
   return data;
 };
 
