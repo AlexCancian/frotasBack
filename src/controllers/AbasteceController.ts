@@ -12,7 +12,8 @@ import { authenticationMiddleware } from "../middlewares/auth.middleware";
 const abasteceRouter = Router();
 
 abasteceRouter.get(
-  "/", authenticationMiddleware,
+  "/",
+  authenticationMiddleware,
   async (_req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const abastecimentos = await getAbastece();
@@ -24,10 +25,15 @@ abasteceRouter.get(
 );
 
 abasteceRouter.get(
-  "/relation/", authenticationMiddleware,
-  async (_req: Request, res: Response, next: NextFunction): Promise<any> => {
+  "/relation/",
+  authenticationMiddleware,
+  async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
-      const abastecimentos = await getAbasteceRelation();
+      const usuarioId = req.query.usuarioId
+        ? Number(req.query.usuarioId)
+        : undefined;
+
+      const abastecimentos = await getAbasteceRelation(usuarioId);
       return res.status(200).json(abastecimentos);
     } catch (error) {
       console.log(error);
@@ -37,7 +43,8 @@ abasteceRouter.get(
 );
 
 abasteceRouter.get(
-  "/:id", authenticationMiddleware,
+  "/:id",
+  authenticationMiddleware,
   async (req: Request, res: Response): Promise<any> => {
     const { id } = req.params;
     const abastecimento = await getAbasteceById(Number(id));
@@ -46,7 +53,8 @@ abasteceRouter.get(
 );
 
 abasteceRouter.post(
-  "/", authenticationMiddleware,
+  "/",
+  authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       // const { error } = await empresaschema.validate(req.body, {
@@ -64,7 +72,8 @@ abasteceRouter.post(
 );
 
 abasteceRouter.put(
-  "/:id", authenticationMiddleware,
+  "/:id",
+  authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       // const { error } = await Refschema.validate(req.body, {
@@ -86,7 +95,8 @@ abasteceRouter.put(
 );
 
 abasteceRouter.delete(
-  "/:id", authenticationMiddleware,
+  "/:id",
+  authenticationMiddleware,
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const { id } = req.params;
